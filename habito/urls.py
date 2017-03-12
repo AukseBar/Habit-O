@@ -15,7 +15,15 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from django.conf.urls import include
+from habito_app import views
 
 urlpatterns = [
-    url(r'^admin/', admin.site.urls),
+    urlpatterns = [
+    url(r'^$', views.index, name='index'),
+    url(r'^habito_app/', include('rango.urls')),
+    # above maps any URLs starting
+    # with habito_app/ to be handled by
+    # the habito_app application
+    url(r'^admin/', admin.site.urls)
 ]
