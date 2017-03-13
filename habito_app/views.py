@@ -58,18 +58,17 @@ def visitor_cookie_handler(request):
                 # 10.5
                 #response.set_cookie('visits', visits)
 
-def index(request)
-    visitor_cookie_handler(request)
+def index (request):
+    #visitor_cookie_handler(request)
     context_dict={}
-    context_dict['visits'] = request.session['visits']
-
-
-    response = render(request, 'habito/index.html', context=context_dict)
+    response = render(request, 'habito/index.html')
 
     return response
 
-def Habit(request)
-    return render(request, 'habito/habit.html')
+def Habit(request):
+    #visitor_cookie_handler(request)
+    response=render(request, 'habito/habit.html')
+    return response
 
 
 
