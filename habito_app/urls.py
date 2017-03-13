@@ -3,4 +3,5 @@ from habito_app import views
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^accounts/', include('registration.backends.simple.urls')),
 ]
