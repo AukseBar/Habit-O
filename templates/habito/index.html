@@ -4,14 +4,22 @@
 <html>
     <head>
         <title>
-            A Try
+            Log in to Habit-O!
         </title>
     </head>
     <body>
-
-        <div>
-           Index page
-        </div>
+		<p> pic of logo goes here</p>
+        <p> To help you start a habit. And stick to it this time. </p>
+		
+			<h1>Login button here</h1>
+	<form id="login_form" method="post" actions="{% url 'login' %}">
+	<!----	{% csrf_token %} -->
+		Username: <input type="text" name="username" value="" size="50" />
+		<br />
+		Password: <input type="password" name="password" value="" size="50" />
+		<br />
+		<input type="submit" value="submit" />
+	</form>
 
     </body>
 </html>
