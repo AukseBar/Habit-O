@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <title>
+            Habit
+        </title>
+    </head>
+    <body>
+<div>
+    {% if habit %}
+        <h1>{{ habit.title }}</h1>
+
+<li>
+    
+        {% if description %}
+            <h2>
+                {{ habit.description }}
+            </h2>
+        {% else %}
+            <strong>No description currently.</strong>
+        {% endif %}
+
+</li>
+
+    {% else %}
+        The specified habit does not exist!
+    {% endif %}
+
+            </div>
+    </body>
+</html>
+
