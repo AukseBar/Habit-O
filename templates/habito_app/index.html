@@ -16,9 +16,9 @@
 		<div>
         {% if habits %}
         <ul>
-            {% for habit in habits %}
-                <li>{{ habit.title }}</li>
-            {% endfor %}
+                {% for habit in habits %}
+                    <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
+                {% endfor %}
         </ul>
         {% else %}
             <strong>There are no habits present.</strong>
