@@ -39,10 +39,7 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'habito_app',
-<<<<<<< HEAD
     #'registration' # registration package
-=======
->>>>>>> bfc95dae4a432670e2e979270db6a68b9a6a4ff9
 ]
 
 MIDDLEWARE = [

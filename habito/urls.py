@@ -24,9 +24,6 @@ urlpatterns = [
     # above maps any URLs starting
     # with habito_app/ to be handled by
     # the habito_app application
-<<<<<<< HEAD
     #url(r'^accounts/', include('registration.backends.simple.urls')),
-=======
->>>>>>> bfc95dae4a432670e2e979270db6a68b9a6a4ff9
     url(r'^admin/', admin.site.urls)
 ]
