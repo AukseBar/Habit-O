@@ -39,7 +39,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'habito_app',
+<<<<<<< HEAD
     #'registration' # registration package
+=======
+>>>>>>> bfc95dae4a432670e2e979270db6a68b9a6a4ff9
 ]
 
 MIDDLEWARE = [
@@ -122,13 +125,4 @@ USE_TZ = True
 
 STATIC_URL = '/static/'
 
-# user registration lock
-REGISTRATION_OPEN = True
-# 5 days activation window
-ACCOUNT_ACTIVATION_DAYS = 5
-# auto login
-REGISTRATION_AUTO_LOGIN = True
-# landing page after login
-LOGIN_REDIRECT_URL = '/habito_app/'
-# unsuccessfull login
-LOGIN_URL = '/accounts/login/'
+
