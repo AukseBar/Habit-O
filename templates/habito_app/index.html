@@ -13,5 +13,17 @@
            Index page
         </div>
 
+		<div>
+        {% if habits %}
+        <ul>
+            {% for habit in habits %}
+                <li>{{ habit.title }}</li>
+            {% endfor %}
+        </ul>
+        {% else %}
+            <strong>There are no habits present.</strong>
+        {% endif %}
+        </div>
+		
     </body>
 </html>

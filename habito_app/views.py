@@ -11,15 +11,14 @@ from django.contrib.auth import logout
 
 from datetime import datetime
 
-
-def index (request):
-    context_dict={}
-    response = render(request, 'habito_app/index.html')
-
+def index(request):
+    habit_list = Habit.objects.order_by('title')[:5]
+    context_dict = {'habits': habit_list}
+    response = render(request, 'habito_app/index.html', context=context_dict)
     return response
 
-def Habit(request):
-    response=render(request, 'habito_app/habit.html')
+def habit(request):
+    response = render(request, 'habito_app/habit.html')
     return response
 
 
