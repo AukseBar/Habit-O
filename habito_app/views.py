@@ -30,8 +30,9 @@ def show_habit(request, habit_title_slug):
 
     try:
         habit = Habit.objects.get(slug=habit_title_slug)
-        days = habit.getDaysList()
+        days = habit.getDays()
         description = habit.description
+
         #build dic for days
         context_dict['habit'] = habit
         context_dict['description'] = description
