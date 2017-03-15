@@ -1,29 +1,38 @@
-<!DOCTYPE html>
-
+<! DOCTYPE html>
 
 <html>
-    <head>
-        <title>
-            A Try
-        </title>
-    </head>
-    <body>
-
-        <div>
-           Index page
-        </div>
-
-		<div>
-        {% if habits %}
-        <ul>
-                {% for habit in habits %}
-                    <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
-                {% endfor %}
-        </ul>
-        {% else %}
-            <strong>There are no habits present.</strong>
-        {% endif %}
-        </div>
-		
-    </body>
+  
+ <head>
+  <link rel="stylesheet" href="styles.css">
+  <title> Habit-O </title>
+  </head>
+  
+  <body>
+    <div id="container">
+      <div id="content">
+    <h1>Habit- O</h1>
+    <p>Create a habit. And stick to it this time.</p>
+    
+    <a href="login.html" class="button">Log in</a>
+    <a href="register.html" class="button">Register</a>
+      </div>
+    </div>
+  </body>
 </html>
+<!-- comment this our for now- need authentication mechanism to work to include this when user is logged in
+      and the above when user is logged out
+
+ 		<div>
+          {% if habits %}
+          <ul>
+ -            {% for habit in habits %}
+ -                <li>{{ habit.title }}</li>
+ -            {% endfor %}
+ +                {% for habit in habits %}
+ +                    <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
+ +                {% endfor %}
+          </ul>
+          {% else %}
+              <strong>There are no habits present.</strong>
+          {% endif %}
+-->

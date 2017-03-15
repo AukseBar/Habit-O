@@ -14,16 +14,19 @@ class Habit(models.Model):
 	# unsure if this should be the case...
 	created = models.DateField(default=date.today)
 	days = models.TextField(max_length=128, default={})
-	slug = models.SlugField()
+	achv_default = {'1':0,'2':0,'3':0}
+	achievements = models.TextField(max_length=128, default=json.dumps(achv_default))
+	slug = models.SlugField()	
 	
-	# Set as unique the combination title + user (a user cannot create two habits with the same title)
+	# Sets as unique the combination title + user 
+	# (a user cannot create two habits with the same title)
 	class Meta:
 		unique_together = ('user', 'title')
 		
 	# Returns days as a dictionary.
 	# A dictionary cannot be directly stored in the database, 
 	# so the value of days field must be parsed to a json object in order to be used
-	def getDaysList(self):
+	def getDays(self):
 		return json.loads(self.days)
 	
 	# Checks days starting from creation date until now
@@ -39,6 +42,30 @@ class Habit(models.Model):
 		self.days = json.dumps(days)
 		self.save()
 	
+	# Returns achievements as a dictionary
+	def getAchievements(self):
+		return json.loads(self.achievements)
+	
+	# Checks achievements and updates the field
+	def checkAchievements(self):
+		achv = self.getAchievements()
+		days = self.getDays()
+		goals = {
+			5:1,
+			10:2,
+			15:3
+			}
+		count = 0
+		for i in range(1, len(days) + 1):
+			if days[str(i)] == 1:
+				count = count + 1
+				if count in goals:
+					achv[str(goals[count])] = 1
+			else:
+				count = 0
+		self.achievements = json.dumps(achv)
+		self.save()
+		
 	def save(self, *args, **kwargs):
 		self.slug = slugify(self.title)
 		super(Habit, self).save(*args, **kwargs)
