@@ -81,3 +81,13 @@ def toogle_day(request):
 		else:
 			return HttpResponseBadRequest()
 	return HttpResponse(habit.getDays()[day_id])
+	
+# Edit the habit's title
+def edit_title(request):
+	if request.method == 'GET':
+		habit_slug = request.GET['slug']
+		habit_title = request.GET['new_title']
+		habit = Habit.objects.get(slug=habit_slug)
+		habit.title = habit_title
+		habit.save()
+	return HttpResponse(habit.title)
