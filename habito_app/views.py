@@ -3,13 +3,14 @@ from django.shortcuts import render
 from habito_app.models import Habit
 
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect, HttpResponse
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.core.urlresolvers import reverse
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
 
 from datetime import datetime
+import json
 
 
 def index(request):
@@ -24,6 +25,7 @@ def show_user(request):
     response = render(request, 'habito_app/test_user.html', context=context_dict)
     return response
 
+
 def register(request):
     response = render(request, 'habito_app/register.html')
     return response
@@ -32,24 +34,50 @@ def login(request):
     response = render(request, 'habito_app/login.html')
     return response
 
+# Shows details of a single habit
 def show_habit(request, habit_title_slug):
-    context_dict = {}
+	try:
+		habit = Habit.objects.get(slug=habit_title_slug)
 
-    try:
-        habit = Habit.objects.get(slug=habit_title_slug)
-        days = habit.getDays()
-        description = habit.description
+		# This function is used to automatically set to 0 null days from creation date until now
+		habit.checkDays()
+		# This function is used to check if achievements are completed
+		habit.checkAchievements()
+		
+		# Builds context dict
+		context_dict = {
+			'habit':habit,
+			'habit_title': habit.title, 
+			'habit_slug':habit.slug, 
+			'habit_desc':habit.description, 
+			'days': habit.getDays(),
+			'achv': habit.getAchievements()
+		}        
+	except Habit.DoesNotExist:
+		context_dict = {
+			'habit':None,
+			'habit_desc':None
+		}
 
-        #build dic for days
-        context_dict['habit'] = habit
-        context_dict['description'] = description
-        #context_dict['days'] = days
-        print description
-        print days
-    except Habit.DoesNotExist:
-        context_dict['habit'] = None
-        context_dict['description'] = None
+	response = render(request, 'habito_app/habit.html', context=context_dict)
+	return response
 
-    response = render(request, 'habito_app/test_habit.html', context=context_dict)
-    return response
+# AJAX VIEWS
 
+# Toggles the value (0,1) in the days field and returns the new value
+def toogle_day(request):
+	day_value = 0
+	if request.method == 'GET':
+		habit_slug = request.GET['slug']
+		day_id = request.GET['day_id']
+		habit = Habit.objects.get(slug=habit_slug)
+		days = habit.getDays()
+		if day_id in days:
+			if days[day_id] == 0:
+				day_value = 1
+			days[day_id] = day_value
+			habit.days = json.dumps(days)
+			habit.save()
+		else:
+			return HttpResponseBadRequest()
+	return HttpResponse(habit.getDays()[day_id])

@@ -1,34 +1,99 @@
 <!DOCTYPE html>
-
-
+{% load staticfiles %}
+{% load habit_o_extras %}
 <html>
-    <head>
-        <title>
-            Habit
-        </title>
-    </head>
-    <body>
-<div>
-    {% if habit %}
-        <h1>{{ habit.title }}</h1>
+   <head>
+      <title>
+         Habit
+      </title>
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+      <script src="{% static 'js/habito-jquery.js' %}"></script>
+      <!-- Minimal CSS, just to let the table look like a table -->
+      <style>
+         #xTable td{
+            border: solid 1px black;
+         }
+         #xTable td{
+            width: 25px;
+            height: 25px;
+         }
+      </style>
+   </head>
+<body>
+   <div>
+      {% if habit %}
+         <h1>{{ habit_title }}</h1>
+         
+         <!-- DESCRIPTION -->
+         <div>
+            {% if habit_desc %}
+               <h2>
+                  {{ habit_desc }}
+               </h2>
+            {% else %}
+               <strong>No description currently.</strong>
+            {% endif %}
+         </div>
+         
+         <!-- DAYS TABLE -->
+         <div>
+            <table id="xTable" data-slug="{{habit_slug}}">
+               <tbody>
+                  <!-- Calls a custom template tag and stores result to a variable -->
+                  {% days_table as days_list %}
+                  <!-- Iterates the variable and builds the table -->
+                  {% for key, value in days_list %}
+                     <tr id="w_{{key}}">
+                        {% for k,v in value %}
+                           {% if v == 1 %}
+                              <td id="day_{{k}}" class="day">1</td>
+                           {% elif v == 0 %}
+                              <td id="day_{{k}}" class="day">0</td>
+                           {% else %}
+                              <td id="day_{{k}}" class="day"></td>
+                           {% endif %}
+                        {% endfor %}
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+         
+         <!-- ACHIEVEMENTS -->
+         <div>
+            <h3>Achievements</h3>
+            <ul>
+               <li>
+                  5 days in a row: 
+                  {% if achv.1 %}
+                     1
+                  {% else %}
+                     0
+                  {% endif %}
+               </li>
+               <li>
+                  10 days in a row: 
+                  {% if achv.2 %}
+                     1
+                  {% else %}
+                     0
+                  {% endif %}
+               </li>
+               <li>
+                  15 days in a row: 
+                  {% if achv.3 %}
+                     1
+                  {% else %}
+                     0
+                  {% endif %}
+               </li>
+            </ul>
+         </div>
+      {% else %}
+         The specified habit does not exist!
+      {% endif %}
 
-<li>
-    
-        {% if description %}
-            <h2>
-                {{ habit.description }}
-            </h2>
-        {% else %}
-            <strong>No description currently.</strong>
-        {% endif %}
-
-</li>
-
-    {% else %}
-        The specified habit does not exist!
-    {% endif %}
-
-            </div>
-    </body>
+   </div>
+</body>
 </html>
 

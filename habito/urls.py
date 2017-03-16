@@ -25,5 +25,8 @@ urlpatterns = [
     # with habito_app/ to be handled by
     # the habito_app application
     #url(r'^accounts/', include('registration.backends.simple.urls')),
-    url(r'^admin/', admin.site.urls)
+    url(r'^admin/', admin.site.urls),
+	
+	# AJAX URLS
+	 url(r'^habits/update_habit/toogle_day/$', views.toogle_day, name='toogle_day'),
 ]

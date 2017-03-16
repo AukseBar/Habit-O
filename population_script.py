@@ -104,7 +104,7 @@ def add_user(username, password, super):
 def add_habit(habit_data):
 	u = User.objects.get(username=habit_data["username"])
 	h = Habit.objects.get_or_create(title=habit_data["title"], user=u)[0]
-	h.desc = habit_data["description"]
+	h.description = habit_data["description"]
 	h.days = json.dumps(habit_data["days"])
 	h.created = habit_data["created"]
 	h.save()
