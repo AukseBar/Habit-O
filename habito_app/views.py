@@ -15,7 +15,7 @@ from datetime import datetime
 def index(request):
     habit_list = Habit.objects.order_by('title')[:5]
     context_dict = {'habits': habit_list}
-    response = render(request, 'habito_app/test_index.html', context=context_dict)
+    response = render(request, 'habito_app/index.html', context=context_dict)
     return response
 
 def show_user(request):
@@ -24,6 +24,13 @@ def show_user(request):
     response = render(request, 'habito_app/test_user.html', context=context_dict)
     return response
 
+def register(request):
+    response = render(request, 'habito_app/register.html')
+    return response
+
+def login(request):
+    response = render(request, 'habito_app/login.html')
+    return response
 
 def show_habit(request, habit_title_slug):
     context_dict = {}
