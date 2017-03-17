@@ -29,4 +29,5 @@ urlpatterns = [
 	
 	# AJAX URLS
 	 url(r'^habits/update_habit/toogle_day/$', views.toogle_day, name='toogle_day'),
+	 url(r'^habits/update_habit/edit_title/$', views.edit_title, name='edit_title'),
 ]
