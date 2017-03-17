@@ -5,6 +5,7 @@ from habito_app.models import Habit
 from django.contrib.auth import authenticate, login
 from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
 from django.core.urlresolvers import reverse
+from habito_app.forms import UserForm
 
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth import logout
