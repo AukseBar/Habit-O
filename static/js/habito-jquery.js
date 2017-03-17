@@ -1,46 +1,81 @@
 $(document).ready(function(){
    
-   /* EDIT HABIT'S TITLE */
-   var editTitleHandler = function(){
-      var el = $(this);
+   /* EDIT HABIT'S TITLE OR DESCRIPTION */
+   // Handler to reset
+   var resetHandler = function(event){
+      var el = event.data.element;
+      var old_data = event.data.old_data;
+      el.html(old_data);
+      el.on('dblclick', editHandler);
+   }
+   
+   // Handler to send Ajax request
+   var requestHandler = function(event){
+      var el = event.data.element;
+      var new_data = el.find('#newData').val();
+      var old_data = event.data.old_data;
+      var edit_type = 'desc';
+      if(el.attr('id') == 'habitTitle'){
+         edit_type = 'title';
+      }
       var habit_slug = el.attr('data-slug');
       
-      // Removes event handler to prevent double click while editing 
+      // If there is some new data sends Ajax request
+      // and stores response in new_data
+      if(new_data != '' && new_data != old_data){
+         $.ajax({
+            type: "GET",
+            url: "/habits/update_habit/edit_title/", 
+            data: {slug: habit_slug, new_data: new_data, edit_type: edit_type},
+            success: function(result){
+               new_data = result;
+            },
+            error: function(xhr, ajaxOptions, thrownError){
+               new_data = old_data; // Resets old title in case of error
+            }
+         });
+         
+         // Write the new data in HTML element
+         el.html(new_data);
+      
+         // Resets event handler for double click
+         el.on('dblclick', editHandler);
+      }
+   }
+   
+   // Handler to start edit
+   var editHandler = function(){
+      var el = $(this);
+      var btn = $('<button id="changeBtn">OK</button>');
+            
+      // Removes event handler to prevent double click event while editing 
       el.off('dblclick');
       
-      var old_title = el.html();
-      el.html('<input id="newTitle" type="text" value="' + old_title + '"/>');
+      var habit_slug = el.attr('data-slug');
+      var old_data = el.html().trim();
       
-      // Function executed after changing
-      $('#newTitle').focus().on('change', function(){
-         var new_title = $(this).val();
-         // If there is a new title sends Ajax request
-         if(new_title != old_title){
-            $.ajax({
-               type: "GET",
-               url: "/habits/update_habit/edit_title/", 
-               data: {slug: habit_slug, new_title: new_title},
-               success: function(result){
-                  new_title = result;
-               },
-               error: function(xhr, ajaxOptions, thrownError){
-                  new_title = old_title;
-               }
-            });
-         }
-         el.html(new_title);
-         
-         // Resets event handler
-         el.on('dblclick', editTitleHandler);
-      });
-      $('#newTitle').on('blur', function(){
-         el.html(old_title);
-         el.on('dblclick', editTitleHandler);
-      });
+      // Adds text field to enter the new title
+      if(el.attr('id') == 'habitTitle'){
+         el.html('<input id="newData" type="text" value="' + old_data + '"/>');
+      }
+      else{
+         el.html('<textarea id="newData">' + old_data + '</textarea>');
+      }
+      
+      // Sets focus on the input element and adds button
+      $('#newData').focus().after(btn);
+      
+      // Double clicking outside the text field cancels the operation
+      $('#newData').on('blur', {element:el, old_data:old_data}, resetHandler);
+      
+      // Clicking the button sends an Ajax request
+      $('#changeBtn').on('mousedown', {element:el, old_data:old_data}, requestHandler);
    };
    
-   // Binds event to the title element
-   $('#habitTitle').on('dblclick', editTitleHandler);
+   // Binds event handler to the elements
+   $('#habitTitle').on('dblclick', editHandler);
+   $('#habitDesc').on('dblclick', editHandler);
+   
    
    /* TOGGLES DAY VALUE */
    $('.day').click(function(){

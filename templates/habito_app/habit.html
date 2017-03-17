@@ -7,7 +7,7 @@
          Habit
       </title>
       <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-<script src="{% static 'js/habito-jquery.js' %}"></script>
+      <script src="{% static 'js/habito-jquery.js' %}"></script>
       <!-- Minimal CSS, just to let the table look like a table -->
       <style>
          #xTable td{
@@ -27,7 +27,7 @@
          <!-- DESCRIPTION -->
          <div>
             {% if habit_desc %}
-               <h2>
+               <h2 id="habitDesc" data-slug="{{habit_slug}}">
                   {{ habit_desc }}
                </h2>
             {% else %}

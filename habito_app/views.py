@@ -109,6 +109,7 @@ def show_habit(request, habit_title_slug):
 	response = render(request, 'habito_app/habit.html', context=context_dict)
 	return response
 
+
 # AJAX VIEWS
 
 # Toggles the value (0,1) in the days field and returns the new value
@@ -129,12 +130,18 @@ def toogle_day(request):
 			return HttpResponseBadRequest()
 	return HttpResponse(habit.getDays()[day_id])
 	
-# Edit the habit's title
+# Edit the habit's title or description
 def edit_title(request):
 	if request.method == 'GET':
 		habit_slug = request.GET['slug']
-		habit_title = request.GET['new_title']
 		habit = Habit.objects.get(slug=habit_slug)
-		habit.title = habit_title
-		habit.save()
-	return HttpResponse(habit.title)
+		if request.GET['edit_type'] == 'title':
+			habit_title = request.GET['new_data']
+			habit.title = habit_title
+			habit.save()
+			return HttpResponse(habit.title)
+		else:
+			habit_desc = request.GET['new_data']
+			habit.description = habit_desc
+			habit.save()
+			return HttpResponse(habit.description)
