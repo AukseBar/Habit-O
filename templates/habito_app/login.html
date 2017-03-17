@@ -1,29 +1,30 @@
+
 <! DOCTYPE html>
 
 <html>
   
  <head>
-  <LINK href="{{STATIC_URL}}css/basic/styles.css" rel="stylesheet" type="text/css" />
- <!-- <link rel="stylesheet" href="styles.css"> -->
-  <title> Log in </title>
+  <link rel="stylesheet" href="styles.css">
+  <title> login </title>
   </head>
   
   <body>
     <div id="container">
       <div id="content">
     <h1>Habit- O</h1>
-    <form>
+    <form id="user_login" method="post" action="/habito_app/login/"
+              enctype="multipart/form-data">
        Username:<br>
-       <input type="text" name="username" value="">
+       <input type="text" name="username" value="username">
       <br>
        Password:<br>
-       <input type="password" name="password" value="">
-       <br><br>
-       <input type="submit" value="Log in" class="button">
-       <a href="{% url 'register' %}" class="button">No account? Register</a>
-</form>
-    
-     <!--<a href="user" class="button">Log in</a>redirects to user homepage-->
+       <input type="password" name="password" value="password">
+       <br>
+	<br>
+       <input type="submit" value="Submit" class="button">
+	{% csrf_token %}
+   
+    </form>
       </div>
     </div>
   </body>

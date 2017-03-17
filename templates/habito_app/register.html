@@ -11,14 +11,19 @@
     <div id="container">
       <div id="content">
     <h1>Habit- O</h1>
-    <form>
+    <form id="user_form" method="post" action="/habito_app/register/"
+              enctype="multipart/form-data">
        Username:<br>
        <input type="text" name="username" value="">
       <br>
        Password:<br>
        <input type="password" name="password" value="">
-       <br><br>
+       <br>
+	<br>
        <input type="submit" value="Submit" class="button">
+	{% csrf_token %}
+       
+         {{ user_form.as_p }}
     </form>
       </div>
     </div>
