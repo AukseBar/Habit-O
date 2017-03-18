@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+
+
+<html>
+    <head>
+        <title>
+            A Try
+        </title>
+    </head>
+    <body>
+
+        {% if user.is_authenticated %}
+        <div>
+           User page
+        </div>
+
+        <div>
+    	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
+    	<p><a href="{% url 'restricted' %}" class="button">restricted page</a></p>
+            <p><a href="{% url 'test_add_habit' %}" class="button">Add a New Habit</a></p>
+        </div>
+
+        <div>
+                {% if habits %}
+                 <ul>
+                {% for habit in habits %}
+                <li><a href="/habito_app/test_habit/{{ habit.slug }}">{{ habit.title }}</a></li>
+                {% endfor %}
+                </ul>
+                {% else %}
+                <strong>There are no habits present.</strong>
+                {% endif %}
+        </div>
+
+        {% else %}
+	    <p><a href="{% url 'login' %}" class="button">Log in</a></p>
+	    <a href="{% url 'register' %}" class="button">Register</a>
+        {% endif %}
+
+    </body>
+</html>

@@ -26,7 +26,7 @@ def index(request):
 def show_user(request):
     habit_list = Habit.objects.order_by('title')[:5]
     context_dict = {'habits': habit_list}
-    response = render(request, 'habito_app/test_user.html', context=context_dict)
+    response = render(request, 'habito_app/user.html', context=context_dict)
     return response
 
 
@@ -67,7 +67,7 @@ def user_login(request):
             if user.is_active:
 
                 login(request, user)
-                return HttpResponseRedirect("/habito_app/")
+                return HttpResponseRedirect("/habito_app/user.html")
             else:
                 return HttpResponse("account diabled")
         else:
