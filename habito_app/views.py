@@ -13,6 +13,8 @@ from django.contrib.auth import logout
 from datetime import datetime
 import json
 
+from habito_app.forms import HabitForm
+
 
 def index(request):
     habit_list = Habit.objects.order_by('title')[:5]
