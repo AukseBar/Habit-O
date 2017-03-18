@@ -141,7 +141,7 @@ def add_habit(request):
 
     # Will handle the bad form, new form, or no form supplied cases.
     # Render the form with error messages (if any).
-    return render(request, 'habito_app/test_add_habit.html', {'form': form})
+    return render(request, 'habito_app/add_habit.html', {'form': form})
 
 
 

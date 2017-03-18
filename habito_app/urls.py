@@ -7,7 +7,7 @@ urlpatterns = [
     # url(r'^habit/', views.about, name='habit'),
 
     url(r'^test_habit/(?P<habit_title_slug>[\w\-]+)/$', views.show_habit, name='habit'),
-    url(r'^test_add_habit/$', views.add_habit, name='test_add_habit'),
+    url(r'^test_add_habit/$', views.add_habit, name='add_habit'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', views.user_login, name='login'),
     url(r'^restricted/', views.restricted, name='restricted'),

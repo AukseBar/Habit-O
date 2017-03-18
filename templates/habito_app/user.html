@@ -1,22 +1,19 @@
-<!DOCTYPE html>
+{% extends 'habito_app/base_authenticated.html' %}
 
-
-<html>
-    <head>
-        <title>
-            User Page
-        </title>
-    </head>
-    <body>
-
-        {% if user.is_authenticated %}
-         <div>Hello, {{ user.username }}!<div>
 
         <div>
-    	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
-    	<p><a href="{% url 'restricted' %}" class="button">restricted page</a></p>
-            <p><a href="{% url 'test_add_habit' %}" class="button">Add a New Habit</a></p>
+            {% block title_block %}
+            User Page
+            {% endblock %}
         </div>
+
+        {% block body_block %}
+
+             <div>
+                 {% if user.is_authenticated %}
+                 Hello, {{ user.username }}!
+                {% endif %}
+             </div>
 
         <div>
                 {% if habits %}
@@ -30,12 +27,5 @@
                 {% endif %}
         </div>
 
-        <p><a href="{% url 'index' %}" class="button">Back to Index</a></p>
-        {% else %}
-	    <p><a href="{% url 'login' %}" class="button">Log in</a></p>
-	    <a href="{% url 'register' %}" class="button">Register</a>
-        <p><a href="{% url 'index' %}" class="button">Back to Index</a></p>
-        {% endif %}
+        {% endblock %}
 
-    </body>
-</html>

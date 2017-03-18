@@ -1,4 +1,4 @@
-<! DOCTYPE html>
+
 {% load staticfiles %}
 
 <html>
@@ -23,7 +23,7 @@
     	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
     	<p><a href="{% url 'restricted' %}" class="button">restricted page</a></p>
           <p><a href="{% url 'user' %}" class="button">Back to User Information</a></p>
-          <p><a href="{% url 'test_add_habit' %}" class="button">Add a New Habit</a></p>
+          <p><a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
     {% else %}
 	<p><a href="{% url 'login' %}" class="button">Log in</a></p>
 	<a href="{% url 'register' %}" class="button">Register</a>
