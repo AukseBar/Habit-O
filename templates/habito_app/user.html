@@ -4,15 +4,13 @@
 <html>
     <head>
         <title>
-            A Try
+            User Page
         </title>
     </head>
     <body>
 
         {% if user.is_authenticated %}
-        <div>
-           User page
-        </div>
+         <div>Hello, {{ user.username }}!<div>
 
         <div>
     	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
@@ -32,9 +30,11 @@
                 {% endif %}
         </div>
 
+        <p><a href="{% url 'index' %}" class="button">Back to Index</a></p>
         {% else %}
 	    <p><a href="{% url 'login' %}" class="button">Log in</a></p>
 	    <a href="{% url 'register' %}" class="button">Register</a>
+        <p><a href="{% url 'index' %}" class="button">Back to Index</a></p>
         {% endif %}
 
     </body>
