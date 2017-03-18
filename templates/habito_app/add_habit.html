@@ -10,7 +10,7 @@
         <h1>Add a Habit</h1>
 
         <div>
-            <form id="habit_form" method="post" action="/habito_app/test_add_habit/">
+            <form id="habit_form" method="post" action="/habito_app/add_habit/">
                 {% csrf_token %}
                 {% for hidden in form.hidden_fields %}
                     {{ hidden }}
