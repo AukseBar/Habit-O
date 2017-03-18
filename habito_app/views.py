@@ -20,11 +20,13 @@ def index(request):
     response = render(request, 'habito_app/index.html', context=context_dict)
     return response
 
+
 def show_user(request):
     habit_list = Habit.objects.order_by('title')[:5]
     context_dict = {'habits': habit_list}
     response = render(request, 'habito_app/test_user.html', context=context_dict)
     return response
+
 
 def register(request):
 
@@ -49,6 +51,7 @@ def register(request):
     response = render(request, 'habito_app/register.html')
     return response
 
+
 def user_login(request):
     
     if request.method == 'POST':
@@ -71,15 +74,16 @@ def user_login(request):
         return render(request, 'habito_app/login.html',{})
 
 
-
 @login_required
 def restricted(request):
     return HttpResponse("FUck OFF")
+
 
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
+
 
 # Shows details of a single habit
 def show_habit(request, habit_title_slug):
@@ -108,6 +112,35 @@ def show_habit(request, habit_title_slug):
 
 	response = render(request, 'habito_app/habit.html', context=context_dict)
 	return response
+
+
+
+def add_habit(request):
+    form = HabitForm()
+
+    # A HTTP POST?
+    if request.method == 'POST':
+        form = HabitForm(request.POST)
+
+        # Have we been provided with a valid form?
+        if form.is_valid():
+            # Save the new category to the database.
+            form.save(commit=True)
+            # Now that the habit is saved
+            # We could give a confirmation message
+            # But since the most recent category added is on the account page
+            # Then we can direct the user back to the index page.
+            # returning index for test
+            return index(request)
+        else:
+            # The supplied form contained errors -
+            # just print them to the terminal.
+            print(form.errors)
+
+    # Will handle the bad form, new form, or no form supplied cases.
+    # Render the form with error messages (if any).
+    return render(request, 'habito_app/test_add_habit.html', {'form': form})
+
 
 
 # AJAX VIEWS
