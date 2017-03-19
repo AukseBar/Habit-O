@@ -10,8 +10,9 @@
     <div id="container">
       <div id="content">
     <h1>Habit- O</h1>
-    <form id="user_login" method="post" action="/habito_app/login/"
+    <form id="user_login" method="post" actions="{% url 'login' %}"
               enctype="multipart/form-data">
+		{% csrf_token %}
        Username:<br>
        <input type="text" name="username" value="username">
       <br>
@@ -20,7 +21,6 @@
        <br>
 	<br>
        <input type="submit" value="Submit" class="button">
-	{% csrf_token %}
    
     </form>
       </div>
