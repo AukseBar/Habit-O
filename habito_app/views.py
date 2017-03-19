@@ -69,7 +69,7 @@ def user_login(request):
                 login(request, user)
                 return HttpResponseRedirect("/habito_app/user.html")
             else:
-                return HttpResponse("account diabled")
+                return HttpResponse("account disabled")
         else:
             return HttpResponse("invalid login details")
     else:

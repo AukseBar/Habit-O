@@ -1,14 +1,12 @@
+{% extends "habito_app/base.html" %}
+{% load staticfiles %}
 
-<! DOCTYPE html>
+  {% block title_block %}
+  Login
+  {% endblock %}
 
-<html>
   
- <head>
-  <link rel="stylesheet" href="styles.css">
-  <title> login </title>
-  </head>
-  
-  <body>
+{% block body_block %}
     <div id="container">
       <div id="content">
     <h1>Habit- O</h1>
@@ -27,5 +25,4 @@
     </form>
       </div>
     </div>
-  </body>
-</html>
+  {% endblock %}

@@ -1,18 +1,15 @@
-<! DOCTYPE html>
+{% extends "habito_app/base.html" %}
+{% load staticfiles %}
 
-<html>
+   {% block title_block %}
+   Register
+   {% endblock %}
   
- <head>
-  <link rel="stylesheet" href="styles.css">
-  <title> Register </title>
-  </head>
-  
-  <body>
+{% block body_block %}
     <div id="container">
       <div id="content">
     <h1>Habit- O</h1>
-    <form id="user_form" method="post" action="/habito_app/register/"
-              enctype="multipart/form-data">
+    <form id="user_form" method="post" actions"{% url 'index' %}" enctype="multipart/form-data">
        Username:<br>
        <input type="text" name="username" value="">
       <br>
@@ -27,5 +24,4 @@
     </form>
       </div>
     </div>
-  </body>
-</html>
+  {% endblock %}
