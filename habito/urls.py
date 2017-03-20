@@ -30,4 +30,5 @@ urlpatterns = [
 	# AJAX URLS
 	 url(r'^habits/update_habit/toogle_day/$', views.toogle_day, name='toogle_day'),
 	 url(r'^habits/update_habit/edit_title/$', views.edit_title, name='edit_title'),
+	 url(r'^habits/update_habit/set_today/$', views.set_today, name='set_today'),
 ]

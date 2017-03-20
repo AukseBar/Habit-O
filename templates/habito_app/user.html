@@ -1,26 +1,39 @@
 {% extends 'habito_app/base_authenticated.html' %}
 {% load staticfiles %}
+<div>
+   {% block title_block %}
+      User Page
+   {% endblock %}
+</div>
 
-        <div>
-            {% block title_block %}
-            User Page
-            {% endblock %}
-        </div>
+{% block body_block %}
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+   <script src="{% static 'js/habito-jquery.js' %}"></script>
+   {% if user.is_authenticated %}
+      <div>
+         Hello, {{ user.username }}!
+      </div>
 
-        {% block body_block %}
-
-        <div class="habit_list">
-                {% if habits %}
-                 <ul>
-				 <h3>Habits you are working on</h3>
-                {% for habit in habits %}
-                <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
-                {% endfor %}
-                </ul>
-                {% else %}
-                <strong>There are no habits present.</strong>
-                {% endif %}
-        </div>
-
-        {% endblock %}
+      <div>
+         {% if habits %}
+            <ul>
+               <h3>Habits you are working on</h3>
+               {% for k,v in habits.items %}
+                  <li>
+                     <a href="/habito_app/habit/{{ v.habit.slug }}">{{ v.habit.title }}</a>
+                     <!-- Button is disable if the last day is already set to 1 -->
+                     <button class="todayBtn" 
+                     {% if v.last_day == "off" %}
+                        disabled="disabled"
+                     {% endif %}
+                     data-slug="{{ v.habit.slug }}">X</button>
+                  </li>
+               {% endfor %}
+            </ul>
+         {% else %}
+            <strong>There are no habits present.</strong>
+         {% endif %}
+      </div>
+   {% endif %}
+{% endblock %}
 

@@ -96,5 +96,22 @@ $(document).ready(function(){
          }
       });
    });
+   
+   /* SET TODAY VALUE */
+   $('.todayBtn').click(function(){
+      var habit_slug = $(this).attr('data-slug');
+      
+      $.ajax({
+         type: "GET",
+         url: "/habits/update_habit/set_today/", 
+         data: {slug: habit_slug},
+         success: function(result){
+            alert(result);
+         },
+         error: function(xhr, ajaxOptions, thrownError){
+            return;
+         }
+      });
+   });
 });
 

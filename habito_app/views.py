@@ -24,10 +24,25 @@ def index(request):
 
 
 def show_user(request):
-    habit_list = Habit.objects.order_by('title')[:5]
-    context_dict = {'habits': habit_list}
-    response = render(request, 'habito_app/user.html', context=context_dict)
-    return response
+	user = request.user
+	if user.is_authenticated():
+		habit_list = Habit.objects.filter(user=user).order_by('created')
+		context_dict = {'habits':{}}
+		for i in range(0,len(habit_list)):
+			habit = habit_list[i]
+			habit.checkDays()
+			today_index = str(habit.getTodayIndex())
+			# Checks if the last day is set to 1
+			# This is used in the template to disable/enable the corresponding button
+			if habit.getDays()[today_index] == 0:
+				last_day = 'on'
+			else:
+				last_day = 'off'
+			context_dict['habits'][i] = {'habit':habit, 'last_day':last_day}
+		response = render(request, 'habito_app/user.html', context=context_dict)
+	else:
+		response = HttpResponseRedirect(reverse('index'))
+	return response
 
 
 def register(request):
@@ -180,3 +195,19 @@ def edit_title(request):
 			habit.description = habit_desc
 			habit.save()
 			return HttpResponse(habit.description)
+
+# Set value for today
+def set_today(request):
+	if request.method == 'GET':
+		user = request.user
+		slug = request.GET['slug']
+		habit = Habit.objects.get(user=user, slug=slug)
+		# Updates days from starting date, in case not already updated
+		habit.checkDays()
+		days = habit.getDays()
+		today_index = str(habit.getTodayIndex())
+		if days[today_index] == 0:
+			days[today_index] = 1
+		habit.days = json.dumps(days)
+		habit.save()
+		return HttpResponse(habit.getDays()[today_index])
