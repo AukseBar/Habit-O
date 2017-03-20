@@ -23,6 +23,7 @@ def index(request):
     return response
 
 
+@login_required
 def show_user(request):
 	user = request.user
 	if user.is_authenticated():
@@ -103,6 +104,7 @@ def user_logout(request):
 
 
 # Shows details of a single habit
+@login_required
 def show_habit(request, habit_title_slug):
 	try:
 		habit = Habit.objects.get(slug=habit_title_slug)
@@ -131,7 +133,7 @@ def show_habit(request, habit_title_slug):
 	return response
 
 
-
+@login_required
 def add_habit(request):
     form = HabitForm()
 
