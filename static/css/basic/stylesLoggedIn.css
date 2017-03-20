@@ -16,7 +16,7 @@ h2 {
 
 h3 {
     color: white;
-    font-size: 14px;
+    font-size: 20px;
     font-family: 'Helvetica';
     margin-bottom:0px;
 }
@@ -40,5 +40,9 @@ h3 {
     font-size: 17px;
     margin: 2px 2px;
     cursor: pointer;
+}
+
+.habit_table {
+	background-color: white;
 }
 

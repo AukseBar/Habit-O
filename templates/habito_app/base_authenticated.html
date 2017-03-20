@@ -6,7 +6,6 @@
 		<link href="{% static 'css/basic/stylesLoggedIn.css' %}"rel="stylesheet" type="text/css" />
         <title>
             Habit-O
-
             {% block title_block %}
             {% endblock %}
 
@@ -15,11 +14,13 @@
     <body>
 		<div class="title">
 			<div class="logo"><h1>Habit-O</h1>
-				<p>{% if user.is_authenticated %}
+				<p>
+				{% if user.is_authenticated %}
                 Hello, {{ user.username }}!
                 {% endif %}
-			<a href="{% url 'logout' %}" class="button">Log out</a></p>
-		</div> 
+				<a href="{% url 'logout' %}" class="button">Log out</a>
+				</p>
+			</div> 
         <div>
             {% block body_block %}
             {% endblock %}
@@ -31,12 +32,12 @@
             <ul>
             {% if user.is_authenticated %}
                 <p><a href="{% url 'index' %}" class="button">Back to Index</a>
-        <a href="{% url 'user' %}" class="button">Back to User Information</a>
-        <a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
-    {% else %}
-	<p><a href="{% url 'login' %}" class="button">Log in</a></p>
-	<a href="{% url 'register' %}" class="button">Register</a>
-     {% endif %}
+				<a href="{% url 'user' %}" class="button">Back to User Information</a>
+				<a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
+			{% else %}
+				<p><a href="{% url 'login' %}" class="button">Log in</a></p>
+				<a href="{% url 'register' %}" class="button">Register</a>
+			{% endif %}
             </ul>
         </div>
 
