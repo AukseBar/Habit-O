@@ -9,12 +9,7 @@
 {% block body_block %}
    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
    <script src="{% static 'js/habito-jquery.js' %}"></script>
-   {% if user.is_authenticated %}
-      <div>
-         Hello, {{ user.username }}!
-      </div>
-
-      <div>
+      <div class="habit_list">
          {% if habits %}
             <ul>
                <h3>Habits you are working on</h3>
@@ -34,6 +29,6 @@
             <strong>There are no habits present.</strong>
          {% endif %}
       </div>
-   {% endif %}
+   
 {% endblock %}
 

@@ -89,7 +89,12 @@ $(document).ready(function(){
          url: "/habits/update_habit/toogle_day/", 
          data: {slug: habit_slug, day_id: day_id},
          success: function(result){
-            day.html(result);
+            if(result == 0){
+               day.html("X");
+            }
+            else{
+               day.html("O");
+            }
          },
          error: function(xhr, ajaxOptions, thrownError){
             return;
