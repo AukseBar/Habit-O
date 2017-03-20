@@ -1,0 +1,61 @@
+body {
+    background-color: rgb(77,219,255);
+}
+h1 {
+    color: white;
+    font-size: 65px;
+    font-family: 'Arial';
+    margin-bottom:-10px;
+}
+h2 {
+    color: white;
+    font-size: 35px;
+    font-family: 'Helvetica';
+    margin-bottom:0px;
+}
+
+h3 {
+    color: white;
+    font-size: 20px;
+    font-family: 'Helvetica';
+    margin-bottom:0px;
+}
+
+.title {
+	position:relative;
+}
+.logo {
+	position: absolute;
+	bottom:1;
+	right:0;
+}
+.button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    margin: 2px 2px;
+    cursor: pointer;
+}
+
+.habit_table {
+	background-color: white;
+}
+
+.footer {
+	position:fixed;
+   left:0px;
+   bottom:100px;
+   height:30px;
+   width:100%;
+}
+
+.habit_list {
+	color: rgb(204,204,255);
+
+}
+

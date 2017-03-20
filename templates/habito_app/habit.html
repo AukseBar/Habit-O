@@ -22,14 +22,14 @@
 
    <div>
       {% if habit %}
-         <h1 id="habitTitle" data-slug="{{habit_slug}}">{{habit_title}}</h1>
+         <h2 id="habitTitle" data-slug="{{habit_slug}}">{{habit_title}}</h2>
          
          <!-- DESCRIPTION -->
          <div>
             {% if habit_desc %}
-               <h2 id="habitDesc" data-slug="{{habit_slug}}">
+               <h3 id="habitDesc" data-slug="{{habit_slug}}">
                   {{ habit_desc }}
-               </h2>
+               </h3>
             {% else %}
                <strong>No description currently.</strong>
             {% endif %}
@@ -37,7 +37,7 @@
          
          <!-- DAYS TABLE -->
          <div>
-            <table id="xTable" data-slug="{{habit_slug}}">
+            <table class="habit_table" id="xTable" data-slug="{{habit_slug}}">
                <tbody>
                   <!-- Calls a custom template tag and stores result to a variable -->
                   {% days_table as days_list %}
@@ -46,9 +46,9 @@
                      <tr id="w_{{key}}">
                         {% for k,v in value %}
                            {% if v == 1 %}
-                              <td id="day_{{k}}" class="day">1</td>
+                              <td id="day_{{k}}" class="day">X</td>
                            {% elif v == 0 %}
-                              <td id="day_{{k}}" class="day">0</td>
+                              <td id="day_{{k}}" class="day">O</td>
                            {% else %}
                               <td id="day_{{k}}" class="day"></td>
                            {% endif %}
@@ -60,7 +60,7 @@
          </div>
          
          <!-- ACHIEVEMENTS -->
-         <div>
+         <div class="achievements">
             <h3>Achievements</h3>
             <ul>
                <li>

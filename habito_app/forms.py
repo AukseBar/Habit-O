@@ -13,6 +13,7 @@ class UserForm(forms.ModelForm):
 
 
 class HabitForm(forms.ModelForm):
+
     title = forms.CharField(max_length=128, help_text="Please enter the habit name.")
     description = forms.CharField(max_length=128, help_text="Please write a description.")
     created = forms.DateField(widget=forms.HiddenInput(), initial=date.today)

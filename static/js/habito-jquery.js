@@ -89,7 +89,29 @@ $(document).ready(function(){
          url: "/habits/update_habit/toogle_day/", 
          data: {slug: habit_slug, day_id: day_id},
          success: function(result){
-            day.html(result);
+            if(result == 0){
+               day.html("X");
+            }
+            else{
+               day.html("O");
+            }
+         },
+         error: function(xhr, ajaxOptions, thrownError){
+            return;
+         }
+      });
+   });
+   
+   /* SET TODAY VALUE */
+   $('.todayBtn').click(function(){
+      var habit_slug = $(this).attr('data-slug');
+      
+      $.ajax({
+         type: "GET",
+         url: "/habits/update_habit/set_today/", 
+         data: {slug: habit_slug},
+         success: function(result){
+            alert(result);
          },
          error: function(xhr, ajaxOptions, thrownError){
             return;

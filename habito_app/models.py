@@ -29,14 +29,20 @@ class Habit(models.Model):
 	def getDays(self):
 		return json.loads(self.days)
 	
-	# Checks days starting from creation date until now
-	# and sets empty days to 0
-	def checkDays(self):
+	# Gets the index of today's value in the days field dict
+	def getTodayIndex(self):
 		days = json.loads(self.days)
 		start_date = self.created
 		now_date = date.today()
-		diff_days = (now_date - start_date).days
-		for d in range(1, diff_days + 1):
+		diff_days = (now_date - start_date)
+		return diff_days.days + 1
+		
+	# Checks days starting from creation date until now
+	# and sets empty days to 0
+	def checkDays(self):
+		days = self.getDays()
+		today_index = self.getTodayIndex()
+		for d in range(1, today_index + 1):
 			if str(d) not in days:
 				days[str(d)] = 0
 		self.days = json.dumps(days)
