@@ -9,9 +9,10 @@
 
         {% block body_block %}
 
-        <div>
+        <div class="habit_list">
                 {% if habits %}
                  <ul>
+				 <h3>Habits you are working on</h3>
                 {% for habit in habits %}
                 <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
                 {% endfor %}

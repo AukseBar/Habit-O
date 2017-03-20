@@ -7,7 +7,7 @@
     </div>
 
     {% block body_block %}
-        <h1>Add a Habit</h1>
+        <h2>Add a Habit</h2>
 
         <div>
             <form id="habit_form" method="post" action="/habito_app/add_habit/">
@@ -20,8 +20,9 @@
                     {{ field.help_text }}
                     {{ field }}
                 {% endfor %}
-                <input type="submit" name="submit" value="Create Habit" />
-            </form>
+               <p> <input class= "button" type="submit" name="submit" value="Create Habit" />
+				</p>
+			</form>
         </div>
 
     {% endblock %}
