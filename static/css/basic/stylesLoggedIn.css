@@ -9,15 +9,36 @@ h1 {
 }
 h2 {
     color: white;
-    font-size: 20px;
-    font-family: 'Arial';
+    font-size: 35px;
+    font-family: 'Helvetica';
     margin-bottom:0px;
 }
 
 h3 {
     color: white;
     font-size: 14px;
-    font-family: 'Arial';
+    font-family: 'Helvetica';
     margin-bottom:0px;
+}
+
+.title {
+	position:relative;
+}
+.logo {
+	position: absolute;
+	bottom:15;
+	right:0;
+}
+.button {
+    background-color: white;
+    border: none;
+    color: black;
+    padding: 15px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 17px;
+    margin: 2px 2px;
+    cursor: pointer;
 }
 

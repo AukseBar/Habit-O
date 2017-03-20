@@ -14,13 +14,12 @@
     </head>
     <body>
 		<div class="title">
-		<h1 class="logo">Habit-O</h1>
-		</div> 
-		<div>
-                 {% if user.is_authenticated %}
-                 Hello, {{ user.username }}!
+			<div class="logo"><h1>Habit-O</h1>
+				<p>{% if user.is_authenticated %}
+                Hello, {{ user.username }}!
                 {% endif %}
-         </div>
+			<a href="{% url 'logout' %}" class="button">Log out</a></p>
+		</div> 
         <div>
             {% block body_block %}
             {% endblock %}
@@ -31,11 +30,9 @@
         <div>
             <ul>
             {% if user.is_authenticated %}
-    	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
-                <p><a href="{% url 'index' %}" class="button">Back to Index</a></p>
-    	<p><a href="{% url 'restricted' %}" class="button">restricted page</a></p>
-          <p><a href="{% url 'user' %}" class="button">Back to User Information</a></p>
-          <p><a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
+                <p><a href="{% url 'index' %}" class="button">Back to Index</a>
+        <a href="{% url 'user' %}" class="button">Back to User Information</a>
+        <a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
     {% else %}
 	<p><a href="{% url 'login' %}" class="button">Log in</a></p>
 	<a href="{% url 'register' %}" class="button">Register</a>

@@ -20,14 +20,6 @@ h1 {
     font-family: 'Arial';
     margin-bottom:-10px;
 }
-.title {
-	position:relative;
-}
-.logo {
-	position: absolute;
-	bottom:0;
-	right:0;
-}
 p {
     color: black;
 }
