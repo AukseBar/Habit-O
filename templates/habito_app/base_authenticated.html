@@ -26,14 +26,16 @@
             {% endblock %}
         </div>
 
-        <hr />
 
         <div>
             <ul>
             {% if user.is_authenticated %}
+			<div class="footer">
+			    <hr />
                 <p><a href="{% url 'index' %}" class="button">Back to Index</a>
 				<a href="{% url 'user' %}" class="button">Back to User Information</a>
 				<a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
+			</div>
 			{% else %}
 				<p><a href="{% url 'login' %}" class="button">Log in</a></p>
 				<a href="{% url 'register' %}" class="button">Register</a>

@@ -46,3 +46,11 @@ h3 {
 	background-color: white;
 }
 
+.footer {
+	position:fixed;
+   left:0px;
+   bottom:100px;
+   height:30px;
+   width:100%;
+}
+
