@@ -1,5 +1,5 @@
 {% extends 'habito_app/base_authenticated.html' %}
-
+{% load staticfiles %}
 
         <div>
             {% block title_block %}
@@ -8,12 +8,6 @@
         </div>
 
         {% block body_block %}
-
-             <div>
-                 {% if user.is_authenticated %}
-                 Hello, {{ user.username }}!
-                {% endif %}
-             </div>
 
         <div>
                 {% if habits %}

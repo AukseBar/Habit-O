@@ -1,0 +1,23 @@
+body {
+    background-color: rgb(77,219,255);
+}
+h1 {
+    color: white;
+    font-size: 65px;
+    font-family: 'Arial';
+    margin-bottom:-10px;
+}
+h2 {
+    color: white;
+    font-size: 20px;
+    font-family: 'Arial';
+    margin-bottom:0px;
+}
+
+h3 {
+    color: white;
+    font-size: 14px;
+    font-family: 'Arial';
+    margin-bottom:0px;
+}
+

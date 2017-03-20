@@ -10,18 +10,16 @@
       <div id="content">
 	<h1>Habit- O</h1>
     {% if user.is_authenticated %}
-       <p>Create a habit. And stick to it this time{{ user.username }}.</p>
+       <p>Create a habit. And stick to it this time {{ user.username }}.</p>
     {% else %}
        <p>Create a habit. And stick to it this time.</p>
     {% endif %}
 
 
     {% if user.is_authenticated %}
-          <div>Hello, {{ user.username }}!<div>
-    	<p><a href="{% url 'logout' %}" class="button">Log out</a></p>
-    	<p><a href="{% url 'restricted' %}" class="button">restricted page</a></p>
-          <p><a href="{% url 'user' %}" class="button">Back to User Information</a></p>
-          <p><a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
+    	<p><a href="{% url 'logout' %}" class="button">Log out</a>
+         <a href="{% url 'user' %}" class="button">Back to User Information</a>
+         <a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
     {% else %}
 	<a href="{% url 'login' %}" class="button">Log in</a>
 	<a href="{% url 'register' %}" class="button">Register</a>
@@ -29,20 +27,3 @@
 	</div>
     </div>
   {% endblock %}
-<!-- comment this our for now- need authentication mechanism to work to include this when user is logged in
-      and the above when user is logged out
-
- 		<div>
-          {% if habits %}
-          <ul>
- -            {% for habit in habits %}
- -                <li>{{ habit.title }}</li>
- -            {% endfor %}
- +                {% for habit in habits %}
- +                    <li><a href="/habito_app/habit/{{ habit.slug }}">{{ habit.title }}</a></li>
- +                {% endfor %}
-          </ul>
-          {% else %}
-              <strong>There are no habits present.</strong>
-          {% endif %}
--->

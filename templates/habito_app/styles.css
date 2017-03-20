@@ -20,21 +20,22 @@ h1 {
     font-family: 'Arial';
     margin-bottom:-10px;
 }
+.title {
+	position:relative;
+}
+.logo {
+	position: absolute;
+	bottom:0;
+	right:0;
+}
 p {
     color: black;
 }
-#container{
-   position: absolute;
-   top: 50%;
-   margin-top: -175px;/* half of #content height*/
-   left: 0;
-   width: 100%;
-}
-#content {
-  /* width: 270px;*/
-   width: 20%;
-   margin:auto;
-  /*height: 250px; */
+.center {
+	text-align: center;
+    margin: 0 auto;
+    width: 400px;;
+    padding: 10px;
 }
 
 form {

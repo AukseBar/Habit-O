@@ -1,23 +1,21 @@
-<!DOCTYPE html>
+{% extends 'habito_app/base_authenticated.html' %}
+{% load staticfiles %}
 
 
-<html>
-    <head>
         <title>
             Habit
         </title>
-    </head>
-    <body>
+<body>
 <div>
     {% if habit %}
-        <h1>{{ habit.title }}</h1>
+        <h2>{{ habit.title }}</h2>
 
 <li>
 
         {% if habit.description %}
-            <h2>
+            <h3>
                 {{ habit.description }}
-            </h2>
+            </h3>
         {% else %}
             <strong>No description currently.</strong>
         {% endif %}
@@ -30,4 +28,3 @@
 
             </div>
     </body>
-</html>
