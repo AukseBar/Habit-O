@@ -22,7 +22,7 @@ def index(request):
     response = render(request, 'habito_app/index.html', context=context_dict)
     return response
 
-
+# Shows the list of habits for the logged in user
 @login_required
 def show_user(request):
 	user = request.user
@@ -106,8 +106,9 @@ def user_logout(request):
 # Shows details of a single habit
 @login_required
 def show_habit(request, habit_title_slug):
+	user = request.user
 	try:
-		habit = Habit.objects.get(slug=habit_title_slug)
+		habit = Habit.objects.get(slug=habit_title_slug, user=user)
 
 		# This function is used to automatically set to 0 null days from creation date until now
 		habit.checkDays()
