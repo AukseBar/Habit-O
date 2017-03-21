@@ -14,12 +14,12 @@
     <body>
 		<div class="title">
 		<div class="greeting">
-				<p>
+				<h4><p>
 				{% if user.is_authenticated %}
                 Hello, {{ user.username }}!
                 {% endif %}
 				<a href="{% url 'logout' %}" class="button">Log out</a>
-				</p>
+				</p></h4>
 				</div>
 			</div> 
         <div>
