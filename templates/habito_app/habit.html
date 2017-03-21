@@ -27,39 +27,15 @@
          <!-- DESCRIPTION -->
          <div class="description">
             {% if habit_desc %}
-               <h3 id="habitDesc" data-slug="{{habit_slug}}">
+               <h4 id="habitDesc" data-slug="{{habit_slug}}">
                   {{ habit_desc }}
-               </h3>
+               </h4>
             {% else %}
                <strong>No description currently.</strong>
             {% endif %}
          </div>
          
-         <!-- DAYS TABLE -->
-         <div class= "tb_element">
-            <table class="habit_table" id="xTable" data-slug="{{habit_slug}}">
-               <tbody>
-                  <!-- Calls a custom template tag and stores result to a variable -->
-                  {% days_table as days_list %}
-                  <!-- Iterates the variable and builds the table -->
-                  {% for key, value in days_list %}
-                     <tr id="w_{{key}}">
-                        {% for k,v in value %}
-                           {% if v == 1 %}
-                              <td id="day_{{k}}" class="day">X</td>
-                           {% elif v == 0 %}
-                              <td id="day_{{k}}" class="day">O</td>
-                           {% else %}
-                              <td id="day_{{k}}" class="day"></td>
-                           {% endif %}
-                        {% endfor %}
-                     </tr>
-                  {% endfor %}
-               </tbody>
-            </table>
-         </div>
-         
-         <!-- ACHIEVEMENTS -->
+		          <!-- ACHIEVEMENTS -->
          <div class="achievements">
             <h3>Achievements</h3>
             <ul>
@@ -92,6 +68,31 @@
                {% endif %}
             </ul>
          </div>
+		 
+         <!-- DAYS TABLE -->
+         <div class= "tb_element">
+            <table class="habit_table" id="xTable" data-slug="{{habit_slug}}">
+               <tbody>
+                  <!-- Calls a custom template tag and stores result to a variable -->
+                  {% days_table as days_list %}
+                  <!-- Iterates the variable and builds the table -->
+                  {% for key, value in days_list %}
+                     <tr id="w_{{key}}">
+                        {% for k,v in value %}
+                           {% if v == 1 %}
+                              <td id="day_{{k}}" class="day">X</td>
+                           {% elif v == 0 %}
+                              <td id="day_{{k}}" class="day">O</td>
+                           {% else %}
+                              <td id="day_{{k}}" class="day"></td>
+                           {% endif %}
+                        {% endfor %}
+                     </tr>
+                  {% endfor %}
+               </tbody>
+            </table>
+         </div>
+         
       {% else %}
          The specified habit does not exist!
       {% endif %}
