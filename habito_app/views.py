@@ -135,30 +135,31 @@ def show_habit(request, habit_title_slug):
 
 @login_required
 def add_habit(request):
-    form = HabitForm()
+	form = HabitForm()
 
-    # A HTTP POST?
-    if request.method == 'POST':
-        form = HabitForm(request.POST)
+	if request.method == 'POST':
+		form = HabitForm(request.POST)
 
-        # Have we been provided with a valid form?
-        if form.is_valid():
-            # Save the new category to the database.
-            form.save(commit=True)
-            # Now that the habit is saved
-            # We could give a confirmation message
-            # But since the most recent category added is on the account page
-            # Then we can direct the user back to the index page.
-            # returning index for test
-            return index(request)
-        else:
-            # The supplied form contained errors -
-            # just print them to the terminal.
-            print(form.errors)
+	# Checks if form is valid
+	if form.is_valid():
+		# Save the new habit to the database.
+		habit = form.save(commit=False)
+		habit.user = request.user
+		habit.save()
+		# Now that the habit is saved
+		# We could give a confirmation message
+		# But since the most recent category added is on the account page
+		# Then we can direct the user back to the index page.
+		# returning index for test
+		return index(request)
+	else:
+		# The supplied form contained errors -
+		# just print them to the terminal.
+		print(form.errors)
 
-    # Will handle the bad form, new form, or no form supplied cases.
-    # Render the form with error messages (if any).
-    return render(request, 'habito_app/add_habit.html', {'form': form})
+	# Will handle the bad form, new form, or no form supplied cases.
+	# Render the form with error messages (if any).
+	return render(request, 'habito_app/add_habit.html', {'form': form})
 
 
 
