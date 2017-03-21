@@ -3,7 +3,7 @@ from django.shortcuts import render
 from habito_app.models import Habit
 
 from django.contrib.auth import authenticate, login
-from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest
+from django.http import HttpResponseRedirect, HttpResponse, HttpResponseBadRequest, JsonResponse
 from django.core.urlresolvers import reverse
 from habito_app.forms import UserForm
 
@@ -177,12 +177,15 @@ def toogle_day(request):
 		if day_id in days:
 			if days[day_id] == 0:
 				day_value = 1
+			else:
+				day_value = 0
 			days[day_id] = day_value
 			habit.days = json.dumps(days)
 			habit.save()
+			return JsonResponse({'new_value':habit.getDays()[day_id]})
 		else:
-			return HttpResponseBadRequest()
-	return HttpResponse(habit.getDays()[day_id])
+			return HttpResponseBadRequest("no")
+	
 	
 # Edit the habit's title or description
 def edit_title(request):
