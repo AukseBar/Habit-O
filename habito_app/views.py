@@ -61,6 +61,10 @@ def register(request):
             user.save()
 
             registered = True
+            if registered == True:
+                response = render(request, 'habito_app/index.html')
+                return response
+
         else:
             print(user_form.errors)
     else:
