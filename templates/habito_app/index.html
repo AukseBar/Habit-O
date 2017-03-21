@@ -18,8 +18,8 @@
 
     {% if user.is_authenticated %}
     	<p><a href="{% url 'logout' %}" class="button">Log out</a>
-         <a href="{% url 'user' %}" class="button">Back to User Information</a>
-         <a href="{% url 'add_habit' %}" class="button">Add a New Habit</a></p>
+         <a href="{% url 'user' %}" class="button">Your Account</a>
+        </p>
     {% else %}
 	<a href="{% url 'login' %}" class="button">Log in</a>
 	<a href="{% url 'register' %}" class="button">Register</a>

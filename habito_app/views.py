@@ -152,7 +152,7 @@ def add_habit(request):
 		# But since the most recent category added is on the account page
 		# Then we can direct the user back to the index page.
 		# returning index for test
-		return index(request)
+		return show_user(request)
 	else:
 		# The supplied form contained errors -
 		# just print them to the terminal.
