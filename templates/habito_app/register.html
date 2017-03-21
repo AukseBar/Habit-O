@@ -16,10 +16,10 @@
     <form id="user_form" method="post" actions"{% url 'register' %}" enctype="multipart/form-data">
 	<br>
 	   Username:<br>
-       <input type="text" name="username" value="">
+       <input type="text" name="username" value="" placeholder="Username">
       <br>
        Password:<br>
-       <input type="password" name="password" value="">
+       <input type="password" name="password" value="" placeholder="Password">
        <br>
 	{% csrf_token %}
     {{ user_form.as_p }}

@@ -10,11 +10,9 @@ class Habit(models.Model):
 	user = models.ForeignKey(User, on_delete=models.CASCADE)
 	title = models.CharField(max_length=128)
 	description = models.TextField()
-	# setting auto_now_add will cause the created field to be not editable
-	# unsure if this should be the case...
 	created = models.DateField(default=date.today)
 	days = models.TextField(max_length=128, default={})
-	achv_default = {'1':0,'2':0,'3':0}
+	achv_default = {'1':0,'2':0,'3':0, '4':0}
 	achievements = models.TextField(max_length=128, default=json.dumps(achv_default))
 	slug = models.SlugField()	
 	
@@ -35,7 +33,11 @@ class Habit(models.Model):
 		start_date = self.created
 		now_date = date.today()
 		diff_days = (now_date - start_date)
-		return diff_days.days + 1
+		index = diff_days.days + 1 
+		# Maximum number of days is 49
+		if index > 49:
+			index = 49
+		return index
 		
 	# Checks days starting from creation date until now
 	# and sets empty days to 0
@@ -48,6 +50,13 @@ class Habit(models.Model):
 		self.days = json.dumps(days)
 		self.save()
 	
+	# Checks if habit is completed (last index in days should be 49)
+	def checkCompleted(self):
+		last_index = self.getTodayIndex()
+		if last_index == 49:
+			return True
+		return False
+		
 	# Returns achievements as a dictionary
 	def getAchievements(self):
 		return json.loads(self.achievements)
@@ -62,6 +71,7 @@ class Habit(models.Model):
 			15:3
 			}
 		count = 0
+		# Checks goals by counting sequences of values = 1
 		for i in range(1, len(days) + 1):
 			if days[str(i)] == 1:
 				count = count + 1
@@ -69,6 +79,9 @@ class Habit(models.Model):
 					achv[str(goals[count])] = 1
 			else:
 				count = 0
+		# Checks completed
+		if self.checkCompleted():
+			achv['4'] = 1
 		self.achievements = json.dumps(achv)
 		self.save()
 		
