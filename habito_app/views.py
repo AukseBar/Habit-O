@@ -217,4 +217,4 @@ def set_today(request):
 			days[today_index] = 1
 		habit.days = json.dumps(days)
 		habit.save()
-		return HttpResponse(habit.getDays()[today_index])
+		return JsonResponse({'today':habit.getDays()[today_index]})

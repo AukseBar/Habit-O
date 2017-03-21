@@ -17,11 +17,12 @@
                   <li>
                    <p><h4> <a href="/habito_app/habit/{{ v.habit.slug }}">{{ v.habit.title }}</a>
                      <!-- Button is disable if the last day is already set to 1 -->
-                     <button class="todayBtn"
                      {% if v.last_day == "off" %}
-                        disabled="disabled"
+                        <button class="todayBtn" disabled="disabled" data-slug="{{ v.habit.slug }}">X</button>
+                     {% else %}
+                        <button class="todayBtn" data-slug="{{ v.habit.slug }}">X</button>
                      {% endif %}
-                     data-slug="{{ v.habit.slug }}">X</button></h4></p>
+                     </h4></p>
                   </li>
                {% endfor %}
             </ul>
