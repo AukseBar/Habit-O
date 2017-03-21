@@ -20,14 +20,24 @@ h3 {
     font-family: 'Helvetica';
     margin-bottom:0px;
 }
+h4 {
+	link-color: white;
+	font-size:20px;
+	font-family: 'Helvetica';
+}
 
 .title {
 	position:relative;
 }
-.logo {
+.greeting {
 	position: absolute;
 	bottom:1;
 	right:0;
+}
+.logo {
+	position: fixed;
+	right: 0px;
+	bottom: 0px;
 }
 .button {
     background-color: white;
@@ -44,6 +54,8 @@ h3 {
 
 .habit_table {
 	background-color: white;
+	position: relative;
+	left: 300 px;
 }
 
 .footer {
@@ -58,4 +70,11 @@ h3 {
 	color: rgb(204,204,255);
 
 }
+
+a:link, a:visited {
+    color: rgb (90,90,90);
+	text-decoration: none;
+}
+
+
 

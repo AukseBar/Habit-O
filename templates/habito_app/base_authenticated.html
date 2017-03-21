@@ -13,19 +13,20 @@
     </head>
     <body>
 		<div class="title">
-			<div class="logo"><h1>Habit-O</h1>
+		<div class="greeting">
 				<p>
 				{% if user.is_authenticated %}
                 Hello, {{ user.username }}!
                 {% endif %}
 				<a href="{% url 'logout' %}" class="button">Log out</a>
 				</p>
+				</div>
 			</div> 
         <div>
             {% block body_block %}
             {% endblock %}
         </div>
-
+		<div class="logo"><h1>Habit-O</h1>
 
         <div>
             <ul>

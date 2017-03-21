@@ -15,13 +15,13 @@
                <h3>Habits you are working on</h3>
                {% for k,v in habits.items %}
                   <li>
-                     <a href="/habito_app/habit/{{ v.habit.slug }}">{{ v.habit.title }}</a>
+                   <p><h4> <a href="/habito_app/habit/{{ v.habit.slug }}">{{ v.habit.title }}</a>
                      <!-- Button is disable if the last day is already set to 1 -->
-                     <button class="todayBtn" 
+                     <button class="todayBtn"
                      {% if v.last_day == "off" %}
                         disabled="disabled"
                      {% endif %}
-                     data-slug="{{ v.habit.slug }}">X</button>
+                     data-slug="{{ v.habit.slug }}">X</button></h4></p>
                   </li>
                {% endfor %}
             </ul>
