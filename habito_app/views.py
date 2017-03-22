@@ -69,8 +69,8 @@ def register(request):
             print(user_form.errors)
     else:
         user_form = UserForm()
-        
-    response = render(request, 'habito_app/register.html')
+        context_dict['user_form'] = user_form
+    response = render(request, 'habito_app/register.html', context_dict)
     return response
 
 
