@@ -79,7 +79,7 @@ class Habit(models.Model):
 					achv[str(goals[count])] = 1
 			else:
 				count = 0
-		# Checks completed
+		# Checks if the habit is completed
 		if self.checkCompleted():
 			achv['4'] = 1
 		self.achievements = json.dumps(achv)

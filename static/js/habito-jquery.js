@@ -1,7 +1,7 @@
 $(document).ready(function(){
    
    /* EDIT HABIT'S TITLE OR DESCRIPTION */
-   // Handler to reset
+   // Handler to reset (invoked when user clicks outside input element)
    var resetHandler = function(event){
       var el = event.data.element;
       var old_data = event.data.old_data;
@@ -31,11 +31,11 @@ $(document).ready(function(){
                new_data = result;
             },
             error: function(xhr, ajaxOptions, thrownError){
-               new_data = old_data; // Resets old title in case of error
+               new_data = old_data; // Resets old data in case of error
             }
          });
          
-         // Write the new data in HTML element
+         // Writes the new data in HTML element
          el.html(new_data);
       
          // Resets event handler for double click
@@ -43,7 +43,7 @@ $(document).ready(function(){
       }
    }
    
-   // Handler to start edit
+   // Handler to start editing
    var editHandler = function(){
       var el = $(this);
       var btn = $('<button id="changeBtn">OK</button>');
@@ -54,7 +54,7 @@ $(document).ready(function(){
       var habit_slug = el.attr('data-slug');
       var old_data = el.html().trim();
       
-      // Adds text field to enter the new title
+      // Adds text field to enter the new data
       if(el.attr('id') == 'habitTitle'){
          el.html('<input id="newData" type="text" value="' + old_data + '"/>');
       }
@@ -62,13 +62,13 @@ $(document).ready(function(){
          el.html('<textarea id="newData">' + old_data + '</textarea>');
       }
       
-      // Sets focus on the input element and adds button
+      // Sets focus on the input element and adds button to confirm
       $('#newData').focus().after(btn);
       
       // Double clicking outside the text field cancels the operation
       $('#newData').on('blur', {element:el, old_data:old_data}, resetHandler);
       
-      // Clicking the button sends an Ajax request
+      // Clicking the confirm button sends an Ajax request
       $('#changeBtn').on('mousedown', {element:el, old_data:old_data}, requestHandler);
    };
    
@@ -80,9 +80,15 @@ $(document).ready(function(){
    /* TOGGLES DAY VALUE */
    $('.day').click(function(){
       var day = $(this);
+      
+      // Gets day id
       var day_id = $(this).attr('id');
       day_id = day_id.substr(day_id.indexOf('_') + 1);
+      
+      // Gets slug
       var habit_slug = $(this).parents('#xTable').attr('data-slug');
+      
+      // Ajax request
       $.ajax({
          type: "GET",
          url: "/habits/update_habit/toogle_day/", 
@@ -105,14 +111,18 @@ $(document).ready(function(){
    /* SET TODAY VALUE */
    $('.todayBtn').click(function(){
       var el = $(this);
+      
+      // Gets slug
       var habit_slug = el.attr('data-slug');
       
+      // Ajax request
       $.ajax({
          type: "GET",
          url: "/habits/update_habit/set_today/", 
          data: {slug: habit_slug},
          success: function(result){
             if(result.today == 1){
+               // If days has been set to 1, button must be disabled
                el.prop('disabled', true);
             }
          },

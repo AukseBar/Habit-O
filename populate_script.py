@@ -1,5 +1,9 @@
 # Script to populate the database
-# Will create some users if not existing and habits associated to the users
+
+# Will create some users if not existing and habits associated to the users:
+# User: admin, Pass: pass1234 (superuser)
+# User: jack, Pass: pass1234
+# User: lisa, Pass: pass1234
 
 import os
 os.environ.setdefault('DJANGO_SETTINGS_MODULE',

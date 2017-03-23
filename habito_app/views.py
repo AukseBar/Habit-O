@@ -48,24 +48,19 @@ def show_user(request):
 
 # Registration
 def register(request):
-
     registered = False
     context_dict={}
     if request.method == 'POST':
-
         user_form = UserForm(data=request.POST)
         context_dict['user_form'] = user_form
         if user_form.is_valid():
             user = user_form.save()
-
             user.set_password(user.password)
             user.save()
-
             registered = True
             if registered == True:
                 response = render(request, 'habito_app/index.html')
                 return response
-
         else:
             print(user_form.errors)
     else:
@@ -74,20 +69,14 @@ def register(request):
     response = render(request, 'habito_app/register.html', context_dict)
     return response
 
-
 # Login
 def user_login(request):
-    
     if request.method == 'POST':
         username = request.POST.get('username')
         password = request.POST.get('password')
-
         user = authenticate(username=username, password=password)
-
         if user is not None:
-
             if user.is_active:
-
                 login(request, user)
                 return HttpResponseRedirect(reverse('user'))
             else:
@@ -97,13 +86,11 @@ def user_login(request):
     else:
         return render(request, 'habito_app/login.html',{})
 
-
 # Log out
 @login_required
 def user_logout(request):
     logout(request)
     return HttpResponseRedirect(reverse('index'))
-
 
 # Shows details of a single habit
 @login_required
@@ -135,7 +122,6 @@ def show_habit(request, habit_title_slug):
 	response = render(request, 'habito_app/habit.html', context=context_dict)
 	return response
 
-
 # Adding a habit
 @login_required
 def add_habit(request):
@@ -161,7 +147,6 @@ def add_habit(request):
 	# Will handle the bad form, new form, or no form supplied cases.
 	# Render the form with error messages (if any).
 	return render(request, 'habito_app/add_habit.html', {'form': form})
-
 
 
 # AJAX VIEWS
@@ -192,25 +177,29 @@ def edit_title(request):
 	if request.method == 'GET':
 		habit_slug = request.GET['slug']
 		habit = Habit.objects.get(slug=habit_slug)
+		# Case for editing title
 		if request.GET['edit_type'] == 'title':
 			habit_title = request.GET['new_data']
 			habit.title = habit_title
 			habit.save()
 			return HttpResponse(habit.title)
+		# Case for editing description
 		else:
 			habit_desc = request.GET['new_data']
 			habit.description = habit_desc
 			habit.save()
 			return HttpResponse(habit.description)
 
-# Set value for today
+# Set value for today to 1
 def set_today(request):
 	if request.method == 'GET':
 		user = request.user
 		slug = request.GET['slug']
 		habit = Habit.objects.get(user=user, slug=slug)
+		
 		# Updates days from starting date, in case not already updated
 		habit.checkDays()
+		
 		days = habit.getDays()
 		today_index = str(habit.getTodayIndex())
 		if days[today_index] == 0:

@@ -13,7 +13,7 @@ def create_user():
     user.save()
     return user
 
-# Create your tests here.
+# Create your tests here
 class Tests(TestCase):
     
     def test_user_model(self):
@@ -25,7 +25,7 @@ class Tests(TestCase):
         self.assertEquals(len(all_users), 1)
 
     def test_registration_form_is_displayed_correctly(self):
-        #Access registration page
+        # Access registration page
         try:
             response = self.client.get(reverse('register'))
         except:
@@ -57,14 +57,14 @@ class Tests(TestCase):
                 return False
 
         #Check form display
-        #Header
+        # Header
         self.assertIn('Login'.lower(), response.content.lower())
 
-        #Username label and input text
+        # Username label and input text
         self.assertIn('Username:', response.content)
         self.assertIn('input type="text" name="username" value="" placeholder="Username"', response.content)
 
-        #Password label and input text
+        # Password label and input text
         self.assertIn('Password:', response.content)
         self.assertIn('input type="password" name="password" value="" placeholder="Password"', response.content)
 
@@ -100,7 +100,7 @@ class Tests(TestCase):
             except:
                 return False
 
-        # Check it redirects to index
+        # Check it redirects to user habits list
         self.assertRedirects(response, reverse('user'))
 
     def test_index_contains_welcome_message(self):
