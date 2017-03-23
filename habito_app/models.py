@@ -11,7 +11,7 @@ class Habit(models.Model):
 	title = models.CharField(max_length=128)
 	description = models.TextField()
 	created = models.DateField(default=date.today)
-	days = models.TextField(max_length=128, default={})
+	days = models.TextField(max_length=432, default={})
 	achv_default = {'1':0,'2':0,'3':0, '4':0}
 	achievements = models.TextField(max_length=128, default=json.dumps(achv_default))
 	slug = models.SlugField()	
