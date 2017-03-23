@@ -62,11 +62,11 @@ class Tests(TestCase):
 
         #Username label and input text
         self.assertIn('Username:', response.content)
-        self.assertIn('input type="text" name="username" value="username"', response.content)
+        self.assertIn('input type="text" name="username" value="" placeholder="Username"', response.content)
 
         #Password label and input text
         self.assertIn('Password:', response.content)
-        self.assertIn('input type="password" name="password" value="password"', response.content)
+        self.assertIn('input type="password" name="password" value="" placeholder="Password"', response.content)
 
         #Submit button
         self.assertIn('input type="submit" value="Submit"', response.content)
@@ -101,9 +101,9 @@ class Tests(TestCase):
                 return False
 
         # Check it redirects to index
-        self.assertRedirects(response, reverse('index'))
+        self.assertRedirects(response, reverse('user'))
 
-    def test_index_contains_hello_message(self):
+    def test_index_contains_welcome_message(self):
         # Check if there is the message 
         response = self.client.get(reverse('index'))
         self.assertIn('Create a habit. And stick to it this time'.lower(), response.content.lower())

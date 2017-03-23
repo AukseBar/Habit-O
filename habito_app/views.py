@@ -89,7 +89,7 @@ def user_login(request):
             if user.is_active:
 
                 login(request, user)
-                return HttpResponseRedirect("/habito_app/user.html")
+                return HttpResponseRedirect(reverse('user'))
             else:
                 return HttpResponse("account disabled")
         else:
