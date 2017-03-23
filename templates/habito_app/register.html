@@ -6,26 +6,19 @@
    {% endblock %}
   
 {% block body_block %}
-    <div id="container">
+   <div id="container">
       <div id="content">
-    <h1>Habit- O</h1>
-	{% if registered %}
-	<p>You're all set now.</p>
-	<a href="{% url 'login' %}" class="button">Log in</a>
-	{% else %}
-    <form id="user_form" method="post" actions"{% url 'register' %}" enctype="multipart/form-data">
-	<br>
-	   Username:<br>
-       <input type="text" name="username" value="" placeholder="Username">
-      <br>
-       Password:<br>
-       <input type="password" name="password" value="" placeholder="Password">
-       <br>
-	{% csrf_token %}
-    {{ user_form.as_p }}
-       <input type="submit" value="Submit" class="button">
-    </form>
-      </div>
-    </div>
-	{% endif %}
-  {% endblock %}
+         <h1>Habit-O</h1>
+         {% if registered %}
+            <p>You're all set now.</p>
+            <a href="{% url 'login' %}" class="button">Log in</a>
+            {% else %}
+            <form id="user_form" method="post" actions"{% url 'register' %}" enctype="multipart/form-data">
+               {{ user_form.as_p }}
+               {% csrf_token %}
+               <input type="submit" value="Submit" class="button">
+            </form>
+         {% endif %}
+      </div> <!-- End content-->
+   </div> <!-- End container-->
+{% endblock %}

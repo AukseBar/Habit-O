@@ -2,13 +2,13 @@
 {% load staticfiles %}
 
   {% block title_block %}
-  Habit-O
+  Home
   {% endblock %}
   
 {% block body_block %}
     <div id="container">
       <div id="content">
-	<h1>Habit- O</h1>
+	<h1>Habit-O</h1>
     {% if user.is_authenticated %}
        <p>Create a habit. And stick to it this time {{ user.username }}.</p>
     {% else %}

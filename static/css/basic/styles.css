@@ -43,3 +43,11 @@ form {
   margin-left: auto;
   margin-right: auto;
   }
+
+  
+#user_form .helptext{
+   display:none;
+}
+#user_form label{
+   display:block;
+}

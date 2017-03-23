@@ -54,7 +54,7 @@ def register(request):
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
-
+        context_dict['user_form'] = user_form
         if user_form.is_valid():
             user = user_form.save()
 
@@ -71,7 +71,7 @@ def register(request):
     else:
         user_form = UserForm()
         context_dict['user_form'] = user_form
-    response = render(request, 'habito_app/register.html', context = context_dict)
+    response = render(request, 'habito_app/register.html', context_dict)
     return response
 
 

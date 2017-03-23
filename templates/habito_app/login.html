@@ -7,22 +7,22 @@
 
   
 {% block body_block %}
-    <div id="container">
+   <div id="container">
       <div id="content">
-    <h1>Habit- O</h1>
-    <form id="user_login" method="post" actions="{% url 'login' %}"
-              enctype="multipart/form-data">
-		{% csrf_token %}
-       Username:<br>
-       <input type="text" name="username" value="" placeholder="Username">
-      <br>
-       Password:<br>
-       <input type="password" name="password" value="" placeholder="Password">
-       <br>
-	<br>
-       <input type="submit" value="Submit" class="button">
-   
-    </form>
+         <h1>Habit-O</h1>
+         <form id="user_login" method="post" actions="{% url 'login' %}"
+         enctype="multipart/form-data">
+            {% csrf_token %}
+            Username:<br>
+            <input type="text" name="username" value="" placeholder="Username">
+            <br>
+            Password:<br>
+            <input type="password" name="password" value="" placeholder="Password">
+            <br>
+            <br>
+            <input type="submit" value="Submit" class="button">
+
+         </form>
       </div>
-    </div>
-  {% endblock %}
+   </div>
+   {% endblock %}

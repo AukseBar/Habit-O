@@ -41,10 +41,10 @@ class Tests(TestCase):
         self.assertTrue(isinstance(response.context['user_form'], UserForm))
 
         # Check form is displayed correctly
-        self.assertEquals(response.context['user_form'].as_p(), user_form.as_p())
+        self.assertEquals(response.context['user_form'].as_p(), UserForm().as_p())
 
         # Check submit button
-        self.assertIn('type="submit" value="submit"', response.content)
+        self.assertIn('type="submit" value="Submit"', response.content)
 
     def test_login_form_is_displayed_correctly(self):
         #Access login page
