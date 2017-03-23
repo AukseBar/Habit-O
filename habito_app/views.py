@@ -16,11 +16,11 @@ import json
 from habito_app.forms import HabitForm
 
 
+# Index
 def index(request):
-    habit_list = Habit.objects.order_by('title')[:5]
-    context_dict = {'habits': habit_list}
-    response = render(request, 'habito_app/index.html', context=context_dict)
+    response = render(request, 'habito_app/index.html')
     return response
+
 
 # Shows the list of habits for the logged in user
 @login_required
@@ -46,10 +46,11 @@ def show_user(request):
 	return response
 
 
+# Registration
 def register(request):
 
     registered = False
-
+    context_dict={}
     if request.method == 'POST':
 
         user_form = UserForm(data=request.POST)
@@ -70,10 +71,11 @@ def register(request):
     else:
         user_form = UserForm()
         context_dict['user_form'] = user_form
-    response = render(request, 'habito_app/register.html', context_dict)
+    response = render(request, 'habito_app/register.html', context = context_dict)
     return response
 
 
+# Login
 def user_login(request):
     
     if request.method == 'POST':
@@ -96,11 +98,7 @@ def user_login(request):
         return render(request, 'habito_app/login.html',{})
 
 
-@login_required
-def restricted(request):
-    return HttpResponse("")
-
-
+# Log out
 @login_required
 def user_logout(request):
     logout(request)
@@ -138,6 +136,7 @@ def show_habit(request, habit_title_slug):
 	return response
 
 
+# Adding a habit
 @login_required
 def add_habit(request):
 	form = HabitForm()
@@ -152,10 +151,7 @@ def add_habit(request):
 		habit.user = request.user
 		habit.save()
 		# Now that the habit is saved
-		# We could give a confirmation message
-		# But since the most recent category added is on the account page
-		# Then we can direct the user back to the index page.
-		# returning index for test
+		# Then we can direct the user back to the user page.
 		return show_user(request)
 	else:
 		# The supplied form contained errors -
